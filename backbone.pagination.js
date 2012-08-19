@@ -16,30 +16,32 @@
   Backbone.Pagination = {
 
     // Called when enabling pagination on a Backbone.Collection.
-    enable: function(collection) {
+    enable: function(collection, config) {
       _.extend(collection, Backbone.Pagination.Paginator)
+      if (config) {
+        _.extend(collection.paginationConfig, config);
+      }
     }
   };
 
   // Define all the pagination methods available.
   Backbone.Pagination.Paginator = {
 
-    // The current page displayed.
+    // The current page displayed -- defaults to page 1.
     currentPage: 1,
 
     // Pagination configuration can be overwritten anytime.
     paginationConfig: {
-      ipp:       20,     // items per page
-      page_attr: 'page',
-      ipp_attr:  'ipp',  // will result in a query like page=4&ipp=20
-      add:       true    // true will append any new data
-                         // false will replace the old data
+      ipp:          20,     // items per page
+      page_attr:    'page',
+      ipp_attr:     'ipp',  // will result in a query like page=4&ipp=20
+      fetchOptions: {}      // any options handed over to the fetch method
     },
 
     // Load the page number given.
     loadPage: function(page) {
       this.currentPage = page;
-      this.fetch({add: this.paginationConfig.add});
+      this.fetch(this.paginationConfig.fetchOptions);
     },
 
     // Load the next page.

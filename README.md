@@ -1,7 +1,7 @@
 backbone-pagination
 ===================
 
-This simple and lightweight (906 Byte minified) pagination plugin for [Backbone.js](http://www.backbone.js) allows you to extend your ```Backbone.Collection```s with pagination functionality by modifying the collection's fetch url.
+This simple and lightweight (906 Byte minified) pagination plugin for [Backbone.js](http://backbone.js) allows you to extend your ```Backbone.Collection```s with pagination functionality by modifying the collection's fetch url.
 
 These two methods are introduced:
 
@@ -27,7 +27,7 @@ If you are not using a module loading library you will want to include the sourc
 
     <script type='text/javascript' src='/js/lib/modules/backbone-pagination.js'></script>
 
-If you are using a module loading library like [Require.js](http://www.require.js) you can simply add it to your collection's dependencies.
+If you are using a module loading library like [Require.js](http://require.js) you can simply add it to your collection's dependencies.
 
     define(['app', 'plugins/backbone.pagination'], function(app) {
         // Your module code.
@@ -58,6 +58,8 @@ Extend your collection by calling the ```Backbone.Pagination.enable```method on 
     	}
     });
 
+The ```enable(collection, config)``` takes an optional config parameter, that can be used to configure the paginator.
+
 Configuring backbone.pagination
 -------------------------------
 
@@ -66,11 +68,11 @@ Configure the url params and items-per-page count at any time by setting the ```
     someCollection.paginationConfig = {
     	ipp: 25, // items per page
     	page_attr: 'page',
-    	ipp_attr: 'ipp'
-    	add: true
+    	ipp_attr: 'ipp',
+    	fetchOptions: {}
     }
 
-If ```paginationConfig.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched.
+The ```fetchOptions``` attribute holds options, that will be passed to the ```Backbone.Collection.fetch()``` method. For example, if ```paginationConfig.fetchOptions.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched. You can also define ```success``` and ```error``` callbacks. See the Backbone.Collection.fetch() method's (documentation)[http://backbonejs.org/#Collection-fetch].
 
 Providing a ```url()``` method
 ------------------------------
@@ -121,7 +123,12 @@ This example uses require.js to define a module providing a sales collection of 
     
             initialize: function(options) {
                 // Enable pagination.
-                Backbone.Pagination.enable(this);
+                Backbone.Pagination.enable(this, {
+                    ipp: 10,
+                    fetchOptions: {
+                        add: true  // in stead of replacing the collection's model items, append new items
+                    }
+                });
             }
         });
     
