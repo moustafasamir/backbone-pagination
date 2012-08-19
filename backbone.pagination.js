@@ -45,6 +45,11 @@
       this.loadPage(this.currentPage +1);
     },
 
+    // Load the previous page.
+    previousPage: function() {
+      this.loadPage((this.currentPage > 0) ? (this.currentPage -1) : 0);
+    },
+
     // The url function will append the page and ipp attribute to the result
     // of an baseUrl property or function (if it exists). Note, that
     // this url function will override any previous defined url function.
