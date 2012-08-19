@@ -39,7 +39,7 @@
     // Load the page number given.
     loadPage: function(page) {
       this.currentPage = page;
-      this.fetch(this.paginationConfig.add);
+      this.fetch({add: this.paginationConfig.add});
     },
 
     // Load the next page.
