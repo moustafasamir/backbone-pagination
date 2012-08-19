@@ -91,7 +91,7 @@ This example uses require.js to define a module providing a sales collection of 
     ],
 
     // Map dependencies from above array.
-    function(app, Backbone, Views) {
+    function(app, Backbone) {
     
         // Create a new module.
         var Sales = app.module();
