@@ -67,7 +67,10 @@ Configure the url params and items-per-page count at any time by setting the ```
     	ipp: 25, // items per page
     	page_attr: 'page',
     	ipp_attr: 'ipp'
+    	add: true
     }
+
+If ```paginationConfig.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched.
 
 Providing a ```url()``` method
 ------------------------------

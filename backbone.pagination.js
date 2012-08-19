@@ -31,13 +31,15 @@
     paginationConfig: {
       ipp:       20,     // items per page
       page_attr: 'page',
-      ipp_attr:  'ipp'   // will result in a query like page=4&ipp=20
+      ipp_attr:  'ipp',  // will result in a query like page=4&ipp=20
+      add:       true    // true will append any new data
+                         // false will replace the old data
     },
 
     // Load the page number given.
     loadPage: function(page) {
       this.currentPage = page;
-      this.fetch();
+      this.fetch(this.paginationConfig.add);
     },
 
     // Load the next page.
