@@ -1,7 +1,7 @@
 backbone-pagination V0.9
 ========================
 
-This simple and lightweight (802 Byte minified) pagination plugin for [Backbone.js](http://backbone.js) allows you to extend your ```Backbone.Collection```s with pagination functionality by modifying the collection's fetch url.
+This simple and lightweight (<1kb minified) pagination plugin for [Backbone.js](http://backbone.js) allows you to extend your ```Backbone.Collection```s with pagination functionality by modifying the collection's fetch url.
 
 These three methods are introduced:
 
