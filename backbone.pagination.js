@@ -41,7 +41,7 @@
 
     // Load the page number given.
     loadPage: function(page) {
-      this.currentPage = page;
+      this.currentPage = (page > 0) ? page : 1;
       this.fetch(this.paginationConfig.fetchOptions);
     },
 
@@ -52,7 +52,7 @@
 
     // Load the previous page.
     previousPage: function() {
-      this.loadPage((this.currentPage > 1) ? (this.currentPage -1) : 0);
+      this.loadPage(this.currentPage -1);
     },
 
     // The url function will append the page and ipp attribute to the result
