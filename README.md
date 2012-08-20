@@ -168,5 +168,5 @@ function(app, Backbone) {
 	// Return the module for AMD compliance.
 	return Sales;
 });
-``
+```
 
