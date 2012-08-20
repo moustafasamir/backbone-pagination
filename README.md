@@ -7,6 +7,7 @@ These two methods are introduced:
 
 * ```loadPage(pageNumber)```
 * ```nextPage()```
+* ```previousPage()```
 
 A typical REST api call with backbone-pagination will look like this:
 
@@ -50,7 +51,7 @@ You probably want to make sure that the shim configuration is set correctly.
 Extending your collection
 -------------------------
 
-Extend your collection by calling the ```Backbone.Pagination.enable```method on your collection:
+Extend your collection by calling the ```Backbone.Pagination.enable```method:
 
     var someCollection = Backbone.Collection.extend({
     	initialize: function(option) {
@@ -58,7 +59,7 @@ Extend your collection by calling the ```Backbone.Pagination.enable```method on 
     	}
     });
 
-The ```enable(collection, config)``` takes an optional config parameter, that can be used to configure the paginator.
+The ```enable(collection, config)``` method takes an optional config parameter, that can be used to configure the paginator.
 
 Configuring backbone.pagination
 -------------------------------
@@ -72,7 +73,7 @@ Configure the url params and items-per-page count at any time by setting the ```
     	fetchOptions: {}
     }
 
-The ```fetchOptions``` attribute holds options, that will be passed to the ```Backbone.Collection.fetch()``` method. For example, if ```paginationConfig.fetchOptions.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched. You can also define ```success``` and ```error``` callbacks. See the Backbone.Collection.fetch() method's (documentation)[http://backbonejs.org/#Collection-fetch].
+The ```fetchOptions``` attribute holds options, that will be passed to the ```Backbone.Collection.fetch()``` method. For example, if ```paginationConfig.fetchOptions.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched. You can also define ```success``` and ```error``` callbacks. See the [Backbone.Collection.fetch() method's documentation](http://backbonejs.org/#Collection-fetch).
 
 Providing a ```url()``` method
 ------------------------------
@@ -99,7 +100,7 @@ This example uses require.js to define a module providing a sales collection of 
     function(app, Backbone) {
     
         // Create a new module.
-        var Sales = app.module();
+        var Sales = {};
     
         // The basic **sales** model.
         Sales.Model = Backbone.Model.extend({
