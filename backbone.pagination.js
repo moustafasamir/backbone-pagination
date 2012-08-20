@@ -51,7 +51,7 @@
 
     // Load the previous page.
     previousPage: function() {
-      this.loadPage((this.currentPage > 0) ? (this.currentPage -1) : 0);
+      this.loadPage((this.currentPage > 1) ? (this.currentPage -1) : 0);
     },
 
     // The url function will append the page and ipp attribute to the result
