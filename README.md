@@ -1,5 +1,5 @@
-backbone-pagination
-===================
+backbone-pagination V0.9
+========================
 
 This simple and lightweight (802 Byte minified) pagination plugin for [Backbone.js](http://backbone.js) allows you to extend your ```Backbone.Collection```s with pagination functionality by modifying the collection's fetch url.
 
@@ -70,15 +70,16 @@ Configuring backbone.pagination
 
 Configure the url params and items-per-page count at any time by setting the ```paginationConfig``` values:
 
+	// default configuration
     someCollection.paginationConfig = {
-        pretty:       true,   // use pretty url params instead of query params
+        pretty:       false,  // use pretty url params instead of query params
     	ipp:          25,     // items per page
     	page_attr:    'page', // the query's page attribute
     	ipp_attr:     'ipp',  // the query's ipp attribute
     	fetchOptions: {}      // any options passed to the fetch() method
     }
 
-If the ```pretty``` attribute is set to true
+If the ```pretty``` attribute is set to ```true``` the resulting api call will result in ```/baseUrl/page/3/ipp/25``` instead of ```/baseUrl?page=3&ipp=25```.
 
 The ```fetchOptions``` attribute holds options, that will be passed to the ```Backbone.Collection.fetch()``` method. For example, if ```paginationConfig.fetchOptions.add``` is set to ```true```, then new items will be appended to the collection. ```false``` will replace the collection's items with any new items fetched. You can also define ```success``` and ```error``` callbacks. See the [Backbone.Collection.fetch() method's documentation](http://backbonejs.org/#Collection-fetch).
 
@@ -92,7 +93,7 @@ API
 
 After enabling pagination on your collection, the following methods and attributes become available:
 
-* ```currentPage``` holds the last fetched page number. Do not modify this attribute, instead call one of the following ```xxxPage()``` methods:
+* ```currentPage``` holds the last fetched page number. Do not modify this attribute. Instead call one of the following ```xxxPage()``` methods:
 * ```loadPage(pageNumber)``` will fetch the page number specified
 * ```nextPage()``` will fetch the next page
 * ```previousPage()``` will fetch the previous page – or fetch the first page if a call to this method would result in a negative or zero page number

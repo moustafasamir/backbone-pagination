@@ -1,5 +1,5 @@
 /* 
- * backbone.paginattion.js v0.8
+ * backbone.paginattion.js v0.9
  * Copyright (C) 2012 Philipp Nolte
  * backbone.paginattion.js may be freely distributed under the MIT license.
  */
@@ -32,6 +32,7 @@
 
     // Pagination configuration can be overwritten anytime.
     paginationConfig: {
+      pretty:       false,  // enable pretty urls url/page/2/ipp/20
       ipp:          20,     // items per page
       page_attr:    'page',
       ipp_attr:     'ipp',  // will result in a query like page=4&ipp=20
@@ -65,6 +66,12 @@
         base += this.baseUrl();
       } else if (typeof this.baseUrl !== 'undefined') {
         base += this.baseUrl;
+      }
+
+      if (this.paginationConfig.pretty) {
+        return base + '/'
+          + this.paginationConfig.page_attr + '/' + this.currentPage + '/'
+          + this.paginationConfig.ipp_attr + '/' + this.paginationConfig.ipp;
       }
 
       // Add the pagination params to the url.
