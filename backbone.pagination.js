@@ -1,7 +1,7 @@
 /* 
- * backbone.paginattion.js v0.9
+ * backbone.pagination.js v0.9
  * Copyright (C) 2012 Philipp Nolte
- * backbone.paginattion.js may be freely distributed under the MIT license.
+ * backbone.pagination.js may be freely distributed under the MIT license.
  */
 
 (function(window) {
@@ -82,5 +82,9 @@
     }
 
   }
+
+  // Provide a PaginatedCollection constructor that extends Backbone.Collection.
+  Backbone.PaginatedCollection = function() {};
+  Backbone.PaginatedCollection.prototype = _.extend(Backbone.Collection.prototype, Backbone.Pagination.Paginator);
 
 })(this);
