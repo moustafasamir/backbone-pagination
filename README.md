@@ -17,6 +17,8 @@ or with ```pretty``` set to ```true```:
 
     /sales/page/3/ipp/25
 
+```Backbone.PaginatedCollection``` is also provided as a convenience class. It extends ```Backbone.Collection``` and mixes in the methods described below.
+
 Dependencies
 ------------
 
@@ -72,6 +74,26 @@ var someCollection = Backbone.Collection.extend({
 ```
 
 The ```enable(collection, config)``` method takes an optional config parameter, that can be used to configure the paginator.
+
+You can also just initialize ```Backbone.PaginatedCollection```:
+
+```javascript
+var paginatedCollection = new Backbone.PaginatedCollection({
+    ipp: 10,
+    page_attr: "page",
+    ipp_attr: "per_page"
+});
+```
+
+Define your own paginated collections by extending ```Backbone.PaginatedCollection```:
+
+```javascript
+var MyPaginatedCollection = function() {};
+
+MyPaginatedCollection.prototype = _.extend({
+    baseUrl: "/collection/"
+}, Backbone.PaginatedCollection.prototype);
+```
 
 Configuring backbone.pagination
 -------------------------------
