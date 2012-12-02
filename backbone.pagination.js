@@ -84,7 +84,6 @@
   }
 
   // Provide a PaginatedCollection constructor that extends Backbone.Collection.
-  Backbone.PaginatedCollection = function() {};
-  Backbone.PaginatedCollection.prototype = _.extend(Backbone.Collection.prototype, Backbone.Pagination.Paginator);
+  Backbone.PaginatedCollection = Backbone.Collection.extend(Backbone.Pagination.Paginator);
 
 })(this);
