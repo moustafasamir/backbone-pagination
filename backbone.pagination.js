@@ -28,7 +28,7 @@
   Backbone.Pagination.Paginator = {
 
     // The current page displayed -- defaults to page 1.
-    currentPage: 1,
+    currentPage: 0,
 
     // Pagination configuration can be overwritten anytime.
     paginationConfig: {
@@ -39,46 +39,35 @@
       fetchOptions: {}      // any options handed over to the fetch method
     },
 
+    _getFetchOptions:function(){
+      var paginationOptions = {data:{}}
+      paginationOptions["data"][this.paginationConfig.page_attr] = this.currentPage;
+      paginationOptions["data"][this.paginationConfig.ipp_attr] = this.paginationConfig.ipp;
+      return $.extend(paginationOptions, this.paginationConfig.fetchOptions)
+    },
     // Load the page number given.
-    loadPage: function(page) {
+    loadPage: function(page, customOptions) {
       this.currentPage = (page > 0) ? page : 1;
-      this.fetch(this.paginationConfig.fetchOptions);
+      this.fetch($.extend(this._getFetchOptions(), customOptions));
     },
 
     // Load the next page.
-    nextPage: function() {
-      this.loadPage(this.currentPage +1);
+    nextPage: function(customOptions) {
+      if (customOptions == null) {
+        customOptions = {};
+      }
+      this.loadPage(this.currentPage +1, customOptions);
     },
 
     // Load the previous page.
-    previousPage: function() {
-      this.loadPage(this.currentPage -1);
+    previousPage: function(customOptions) {
+      if (customOptions == null) {
+        customOptions = {};
+      }
+      this.loadPage(this.currentPage -1, customOptions);
     },
-
-    // The url function will append the page and ipp attribute to the result
-    // of an baseUrl property or function (if it exists). Note, that
-    // this url function will override any previous defined url function.
-    url: function() {
-
-      // Generate the preceding base of the url.
-      var base = "";
-      if (typeof this.baseUrl === 'function') {
-        base += this.baseUrl();
-      } else if (typeof this.baseUrl !== 'undefined') {
-        base += this.baseUrl;
-      }
-
-      if (this.paginationConfig.pretty) {
-        return base + '/'
-          + this.paginationConfig.page_attr + '/' + this.currentPage + '/'
-          + this.paginationConfig.ipp_attr + '/' + this.paginationConfig.ipp;
-      }
-
-      // Add the pagination params to the url.
-      var params = {};
-      params[this.paginationConfig.page_attr] = this.currentPage;
-      params[this.paginationConfig.ipp_attr]  = this.paginationConfig.ipp;
-      return base + ((base.indexOf('?') === -1) ? '?' : '&') + $.param(params);
+    resetPagination: function(){
+      this.currentPage = 0;
     }
 
   }
@@ -87,3 +76,4 @@
   Backbone.PaginatedCollection = Backbone.Collection.extend(Backbone.Pagination.Paginator);
 
 })(this);
+

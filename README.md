@@ -1,3 +1,10 @@
+UPDATE
+=============
+This is the same as the original plugin, but these modifications:
+1-Allow users to pass parameter to collection.fetch() when calling nextPage()
+2-resetPagination function to reset paging to first page again
+3-remove url function
+
 backbone-pagination V0.9
 ========================
 
